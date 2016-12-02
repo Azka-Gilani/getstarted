@@ -31,8 +31,20 @@ def webhook():
 
 
 def processRequest(req):
+    ACCESS_TOKEN=EAAMikdHHLIgBAKUhiZBWlABapCNEHywouHyp9NPnjRjJP30kWxZBgbfZCDDPkQ4nZAiJHXZBajKqG9IqvoOjQbkotf0ebXWVCA9Mif12zZC39Ep4jifRgZBBwQ3cleJsJDnLe0RlFWfhqQvsO0RlxBpZCEeWZCZAtaogaWZC1ZBy3OAKwwZDZD
     if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
+    data= {
+    "setting_type":"call_to_actions",
+    "thread_state":"new_thread",
+    "call_to_actions":[
+    {
+      "payload":"USER_DEFINED_PAYLOAD"
+    }
+  ]
+    }
+    resp = req.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + ACCESS_TOKEN, json=data)
+    print(resp.content)
     global city_names
     city_names=processlocation(req)
     global QR
